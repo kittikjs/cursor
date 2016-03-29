@@ -25,13 +25,13 @@ export default class Color {
   /**
    * Create new Color instance.
    * You can use different formats of color: named, rgb or hex.
-   * Class will try to parse your provided color, otherwise throws an error.
+   * {@link Color} will try to parse your provided color, otherwise throws an error.
    *
    * @constructor
    * @param {String|Object} color String with named color, rgb, hex or object with {r, g, b} properties
-   * @param {Number} color.r Red channel
-   * @param {Number} color.g Green channel
-   * @param {Number} color.b Blue channel
+   * @param {Number} [color.r] Red channel
+   * @param {Number} [color.g] Green channel
+   * @param {Number} [color.b] Blue channel
    * @returns {Color}
    *
    * @example
@@ -146,7 +146,7 @@ export default class Color {
   }
 
   /**
-   * Check if provided color written in RGB representation.
+   * Check if provided color is written in RGB representation.
    *
    * @static
    * @param {String} rgb RGB color
@@ -157,7 +157,7 @@ export default class Color {
   }
 
   /**
-   * Check if provided color written in HEX representation.
+   * Check if provided color is written in HEX representation.
    *
    * @static
    * @param {String} hex HEX color

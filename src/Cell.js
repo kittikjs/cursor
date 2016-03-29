@@ -2,8 +2,7 @@ import {DISPLAY_MODES} from './util/displayModes';
 import {encodeToVT100} from './util/encodeToVT100';
 
 /**
- * Wrapper around one cell in the terminal.
- * Used for filling terminal wrapper in the cursor.
+ * Cell responsible for mapping separate cells in the real terminal to the virtual one.
  *
  * @since 3.1.0
  */
@@ -12,7 +11,7 @@ export default class Cell {
    * Create Cell instance which are able to convert itself to ASCII control sequence.
    *
    * @constructor
-   * @param {String} [char] Char that you want to wrap with control sequence
+   * @param {String} [char] Char that you want to wrap with control sequences
    * @param {Object} [options] Options object where you can set additional style to char
    * @param {Number} [options.x] X coordinate
    * @param {Number} [options.y] Y coordinate
@@ -65,7 +64,7 @@ export default class Cell {
    * Set new char to cell.
    * If char is longer than 1 char, it slices string to 1 char.
    *
-   * @param {String} [char]
+   * @param {String} [char=' ']
    * @returns {Cell}
    */
   setChar(char = ' ') {
@@ -196,7 +195,6 @@ export default class Cell {
 
   /**
    * Mark cell as modified or not.
-   * It useful when you need to filter out only modified cells without building the diff.
    *
    * @param {Boolean} [isModified=true] Flag shows if cell is modified
    * @returns {Cell}
@@ -226,8 +224,7 @@ export default class Cell {
   }
 
   /**
-   * Convert cell to ASCII control sequence.
-   * Disables flag which marks cell as modified.
+   * Convert cell to VT100 compatible control sequence.
    *
    * @returns {String}
    */
