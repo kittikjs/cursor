@@ -11,9 +11,9 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf ./lib",
-    "compile": "npm run clean; babel src --out-dir lib; npm run docs",
+    "compile": "npm run clean; babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "docs": "jsdoc2md \"lib/**/*.js\" > API.md",
+    "docs": "npm run compile; jsdoc2md \"lib/**/*.js\" > API.md",
     "prepublish": "npm run compile",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
