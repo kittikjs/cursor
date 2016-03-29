@@ -238,14 +238,14 @@ export default class Cell {
       encodeToVT100(`[${y + 1};${x + 1}f`) +
       (background.r > -1 ? encodeToVT100(`[48;2;${background.r};${background.g};${background.b}m`) : '') +
       (foreground.r > -1 ? encodeToVT100(`[38;2;${foreground.r};${foreground.g};${foreground.b}m`) : '') +
-      (display.bold ? encodeToVT100(`[${DISPLAY_MODES.BOLD}m`) : '') +
-      (display.dim ? encodeToVT100(`[${DISPLAY_MODES.DIM}m`) : '') +
-      (display.underlined ? encodeToVT100(`[${DISPLAY_MODES.UNDERLINED}m`) : '') +
-      (display.blink ? encodeToVT100(`[${DISPLAY_MODES.BLINK}m`) : '') +
-      (display.reverse ? encodeToVT100(`[${DISPLAY_MODES.REVERSE}m`) : '') +
-      (display.hidden ? encodeToVT100(`[${DISPLAY_MODES.HIDDEN}m`) : '') +
+      (display.bold ? encodeToVT100(DISPLAY_MODES.BOLD) : '') +
+      (display.dim ? encodeToVT100(DISPLAY_MODES.DIM) : '') +
+      (display.underlined ? encodeToVT100(DISPLAY_MODES.UNDERLINED) : '') +
+      (display.blink ? encodeToVT100(DISPLAY_MODES.BLINK) : '') +
+      (display.reverse ? encodeToVT100(DISPLAY_MODES.REVERSE) : '') +
+      (display.hidden ? encodeToVT100(DISPLAY_MODES.HIDDEN) : '') +
       char +
-      encodeToVT100(`[${DISPLAY_MODES.RESET_ALL}m`)
+      encodeToVT100(DISPLAY_MODES.RESET_ALL)
     );
   }
 

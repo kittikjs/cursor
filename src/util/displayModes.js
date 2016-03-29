@@ -1,21 +1,21 @@
 /**
- * Map of the display modes that can be used in Cursor API.
+ * Dictionary of the display modes and VT100 control sequences.
  * There are the most commonly supported control sequences for formatting text and their resetting.
  *
  * @type {Object}
  */
 export const DISPLAY_MODES = {
-  RESET_ALL: 0,
-  BOLD: 1,
-  DIM: 2,
-  UNDERLINED: 4,
-  BLINK: 5,
-  REVERSE: 7,
-  HIDDEN: 8,
-  RESET_BOLD: 21,
-  RESET_DIM: 22,
-  RESET_UNDERLINED: 24,
-  RESET_BLINK: 25,
-  RESET_REVERSE: 27,
-  RESET_HIDDEN: 28
+  RESET_ALL: '[0m',
+  BOLD: '[1m',
+  DIM: '[2m',
+  UNDERLINED: '[4m',
+  BLINK: '[5m',
+  REVERSE: '[7m',
+  HIDDEN: '[8m',
+  RESET_BOLD: '[21m',
+  RESET_DIM: '[22m',
+  RESET_UNDERLINED: '[24m',
+  RESET_BLINK: '[25m',
+  RESET_REVERSE: '[27m',
+  RESET_HIDDEN: '[28m'
 };
