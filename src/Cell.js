@@ -124,7 +124,7 @@ export default class Cell {
    */
   setBackground(colorName = 'none') {
     const color = colorName.toUpperCase();
-    this._background = COLORS[color] ? color : 'none';
+    this._background = COLORS.hasOwnProperty(color) ? color : 'none';
 
     return this;
   }
@@ -146,7 +146,7 @@ export default class Cell {
    */
   setForeground(colorName = 'none') {
     const color = colorName.toUpperCase();
-    this._foreground = COLORS[color] ? color : 'none';
+    this._foreground = COLORS.hasOwnProperty(color) ? color : 'none';
 
     return this;
   }
