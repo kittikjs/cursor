@@ -12,8 +12,8 @@ describe('Cursor', () => {
     assert.equal(cursor._height, process.stdout.rows);
     assert.equal(cursor._x, 0);
     assert.equal(cursor._y, 0);
-    assert.deepEqual(cursor._background, {r: -1, g: -1, b: -1});
-    assert.deepEqual(cursor._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._background, 'none');
+    assert.equal(cursor._foreground, 'none');
     assert.notOk(cursor._display.bold);
     assert.notOk(cursor._display.dim);
     assert.notOk(cursor._display.underlined);
@@ -32,8 +32,8 @@ describe('Cursor', () => {
     assert.equal(cursor._height, 20);
     assert.equal(cursor._x, 0);
     assert.equal(cursor._y, 0);
-    assert.deepEqual(cursor._background, {r: -1, g: -1, b: -1});
-    assert.deepEqual(cursor._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._background, 'none');
+    assert.equal(cursor._foreground, 'none');
     assert.notOk(cursor._display.bold);
     assert.notOk(cursor._display.dim);
     assert.notOk(cursor._display.underlined);
@@ -203,21 +203,21 @@ describe('Cursor', () => {
   it('Should properly change foreground color', () => {
     const cursor = new Cursor({width: 20, height: 10});
 
-    assert.deepEqual(cursor._foreground, {r: -1, g: -1, b: -1});
-    assert.instanceOf(cursor.foreground('white'), Cursor);
-    assert.deepEqual(cursor._foreground, {r: 255, g: 255, b: 255});
-    assert.instanceOf(cursor.foreground(false), Cursor);
-    assert.deepEqual(cursor._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._foreground, 'none');
+    assert.instanceOf(cursor.foreground('black'), Cursor);
+    assert.equal(cursor._foreground, 'black');
+    assert.instanceOf(cursor.foreground(), Cursor);
+    assert.equal(cursor._foreground, 'none');
   });
 
   it('Should properly change background color', () => {
     const cursor = new Cursor({width: 20, height: 10});
 
-    assert.deepEqual(cursor._background, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._background, 'none');
     assert.instanceOf(cursor.background('black'), Cursor);
-    assert.deepEqual(cursor._background, {r: 0, g: 0, b: 0});
-    assert.instanceOf(cursor.background(false), Cursor);
-    assert.deepEqual(cursor._background, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._background, 'black');
+    assert.instanceOf(cursor.background(), Cursor);
+    assert.equal(cursor._background, 'none');
   });
 
   it('Should properly enable bold mode', () => {
@@ -385,7 +385,7 @@ describe('Cursor', () => {
   });
 
   it('Should properly create new instance from static create()', () => {
-    const cursor = Cursor.create();
+    const cursor = Cursor.create({stream: process.stdout});
 
     assert.instanceOf(cursor, Cursor);
     assert.equal(cursor._stream, process.stdout);
@@ -393,8 +393,8 @@ describe('Cursor', () => {
     assert.equal(cursor._height, process.stdout.rows);
     assert.equal(cursor._x, 0);
     assert.equal(cursor._y, 0);
-    assert.deepEqual(cursor._background, {r: -1, g: -1, b: -1});
-    assert.deepEqual(cursor._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cursor._background, 'none');
+    assert.equal(cursor._foreground, 'none');
     assert.notOk(cursor._display.bold);
     assert.notOk(cursor._display.dim);
     assert.notOk(cursor._display.underlined);

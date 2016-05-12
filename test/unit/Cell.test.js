@@ -10,8 +10,8 @@ describe('Cell', () => {
     assert.equal(cell._char, ' ');
     assert.equal(cell._x, 0);
     assert.equal(cell._y, 0);
-    assert.deepEqual(cell._background, {r: -1, g: -1, b: -1});
-    assert.deepEqual(cell._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cell._background, 'none');
+    assert.equal(cell._foreground, 'none');
     assert.deepEqual(cell._display, {
       bold: false,
       dim: false,
@@ -26,8 +26,8 @@ describe('Cell', () => {
     const cell = new Cell(' ', {
       x: 10,
       y: 10,
-      background: {r: 1, g: 2, b: 3},
-      foreground: {r: 1, g: 2, b: 3},
+      background: 'white',
+      foreground: 'black',
       display: {bold: true}
     });
 
@@ -35,8 +35,8 @@ describe('Cell', () => {
     assert.equal(cell._char, ' ');
     assert.equal(cell._x, 10);
     assert.equal(cell._y, 10);
-    assert.deepEqual(cell._background, {r: 1, g: 2, b: 3});
-    assert.deepEqual(cell._foreground, {r: 1, g: 2, b: 3});
+    assert.equal(cell._background, 'WHITE');
+    assert.equal(cell._foreground, 'BLACK');
     assert.deepEqual(cell._display, {
       bold: true,
       dim: false,
@@ -80,21 +80,21 @@ describe('Cell', () => {
   it('Should properly get/set background color', () => {
     const cell = new Cell();
 
-    assert.deepEqual(cell.getBackground(), {r: -1, g: -1, b: -1});
-    assert.instanceOf(cell.setBackground(0, 100, 200), Cell);
-    assert.deepEqual(cell.getBackground(), {r: 0, g: 100, b: 200});
+    assert.equal(cell.getBackground(), 'none');
+    assert.instanceOf(cell.setBackground('black'), Cell);
+    assert.equal(cell.getBackground(), 'BLACK');
     assert.instanceOf(cell.setBackground(), Cell);
-    assert.deepEqual(cell.getBackground(), {r: -1, g: -1, b: -1});
+    assert.equal(cell.getBackground(), 'none');
   });
 
   it('Should properly get/set foreground color', () => {
     const cell = new Cell();
 
-    assert.deepEqual(cell.getForeground(), {r: -1, g: -1, b: -1});
-    assert.instanceOf(cell.setForeground(0, 100, 200), Cell);
-    assert.deepEqual(cell.getForeground(), {r: 0, g: 100, b: 200});
+    assert.equal(cell.getForeground(), 'none');
+    assert.instanceOf(cell.setForeground('black'), Cell);
+    assert.equal(cell.getForeground(), 'BLACK');
     assert.instanceOf(cell.setForeground(), Cell);
-    assert.deepEqual(cell.getForeground(), {r: -1, g: -1, b: -1});
+    assert.equal(cell.getForeground(), 'none');
   });
 
   it('Should properly get/set display modes', () => {
@@ -145,8 +145,8 @@ describe('Cell', () => {
     const mock = sinon.mock(cell);
 
     mock.expects('setChar').once().withExactArgs(' ').returns(cell);
-    mock.expects('setBackground').once().withExactArgs(-1, -1, -1).returns(cell);
-    mock.expects('setForeground').once().withExactArgs(-1, -1, -1).returns(cell);
+    mock.expects('setBackground').once().withExactArgs('none').returns(cell);
+    mock.expects('setForeground').once().withExactArgs('none').returns(cell);
     mock.expects('setDisplay').once().withExactArgs(false, false, false, false, false, false).returns(cell);
 
     assert.instanceOf(cell.reset(), Cell);
@@ -161,12 +161,12 @@ describe('Cell', () => {
     assert.equal(cell.toString(), '\u001b[1;21f \u001b[0m');
     assert.instanceOf(cell.setY(10), Cell);
     assert.equal(cell.toString(), '\u001b[11;21f \u001b[0m');
-    assert.instanceOf(cell.setBackground(0, 100, 200), Cell);
-    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;2;0;100;200m \u001b[0m');
-    assert.instanceOf(cell.setForeground(200, 100, 0), Cell);
-    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;2;0;100;200m\u001b[38;2;200;100;0m \u001b[0m');
+    assert.instanceOf(cell.setBackground('black'), Cell);
+    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;5;0m \u001b[0m');
+    assert.instanceOf(cell.setForeground('white'), Cell);
+    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;5;0m\u001b[38;5;15m \u001b[0m');
     assert.instanceOf(cell.setDisplay(true, true, true, true, true, true), Cell);
-    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;2;0;100;200m\u001b[38;2;200;100;0m\u001b[1m\u001b[2m\u001b[4m\u001b[5m\u001b[7m\u001b[8m \u001b[0m');
+    assert.equal(cell.toString(), '\u001b[11;21f\u001b[48;5;0m\u001b[38;5;15m\u001b[1m\u001b[2m\u001b[4m\u001b[5m\u001b[7m\u001b[8m \u001b[0m');
   });
 
   it('Should properly create Cell instance from static create()', () => {
@@ -176,8 +176,8 @@ describe('Cell', () => {
     assert.equal(cell._char, ' ');
     assert.equal(cell._x, 10);
     assert.equal(cell._y, 20);
-    assert.deepEqual(cell._background, {r: -1, g: -1, b: -1});
-    assert.deepEqual(cell._foreground, {r: -1, g: -1, b: -1});
+    assert.equal(cell._background, 'none');
+    assert.equal(cell._foreground, 'none');
     assert.deepEqual(cell._display, {
       bold: false,
       dim: false,
