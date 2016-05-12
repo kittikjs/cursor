@@ -240,13 +240,14 @@ export default class Cursor {
    * Set the foreground color.
    * This color is used when text is rendering.
    *
-   * @param {String|Boolean} color Color name or false if you want to disable foreground filling
+   * @param {String} color Color name or `none` if you want to disable foreground filling
    * @returns {Cursor}
    * @example
    * cursor.foreground('black');
+   * cursor.foreground('none');
    */
-  foreground(color) {
-    this._foreground = color ? color : 'none';
+  foreground(color = 'none') {
+    this._foreground = color;
 
     return this;
   }
@@ -255,13 +256,14 @@ export default class Cursor {
    * Set the background color.
    * This color is used for filling the whole cell in the TTY.
    *
-   * @param {String|Boolean} color Color name or false if you want to disable background filling
+   * @param {String} color Color name or `none` if you want to disable background filling
    * @returns {Cursor}
    * @example
    * cursor.background('black');
+   * cursor.background('none');
    */
-  background(color) {
-    this._background = color ? color : 'none';
+  background(color = 'none') {
+    this._background = color;
 
     return this;
   }

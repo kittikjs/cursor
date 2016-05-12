@@ -110,7 +110,7 @@ export default class Cell {
   /**
    * Get current background color.
    *
-   * @returns {{r: Number, g: Number, b: Number}}
+   * @returns {String}
    */
   getBackground() {
     return this._background;
@@ -119,11 +119,12 @@ export default class Cell {
   /**
    * Set new background color.
    *
-   * @param {String} [colorName=none]
+   * @param {String} [colorName=none] Color name from {@link COLORS} dictionary.
    * @returns {Cell}
    */
   setBackground(colorName = 'none') {
-    this._background = colorName;
+    const color = colorName.toUpperCase();
+    this._background = COLORS[color] ? color : 'none';
 
     return this;
   }
@@ -131,7 +132,7 @@ export default class Cell {
   /**
    * Get current foreground color.
    *
-   * @returns {{r: Number, g: Number, b: Number}}
+   * @returns {String}
    */
   getForeground() {
     return this._foreground;
@@ -140,11 +141,12 @@ export default class Cell {
   /**
    * Set new foreground color.
    *
-   * @param {String} [colorName=none]
+   * @param {String} [colorName=none] Color name from {@link COLORS} dictionary.
    * @returns {Cell}
    */
   setForeground(colorName = 'none') {
-    this._foreground = colorName;
+    const color = colorName.toUpperCase();
+    this._foreground = COLORS[color] ? color : 'none';
 
     return this;
   }
