@@ -1,5 +1,4 @@
 import Cell from './Cell';
-import Color from './Color';
 import {encodeToVT100} from './util/encodeToVT100';
 
 /**
@@ -42,8 +41,8 @@ export default class Cursor {
 
     this._x = 0;
     this._y = 0;
-    this._background = {r: -1, g: -1, b: -1};
-    this._foreground = {r: -1, g: -1, b: -1};
+    this._background = 'none';
+    this._foreground = 'none';
     this._display = {bold: false, dim: false, underlined: false, blink: false, reverse: false, hidden: false};
 
     this._cells = Array.from({length: width * height}).map(() => new Cell());
@@ -79,8 +78,8 @@ export default class Cursor {
           .setChar(char)
           .setX(x)
           .setY(y)
-          .setBackground(background.r, background.g, background.b)
-          .setForeground(foreground.r, foreground.g, foreground.b)
+          .setBackground(background)
+          .setForeground(foreground)
           .setDisplay(display.bold, display.dim, display.underlined, display.blink, display.reverse, display.hidden)
           .setModified(true);
       }
@@ -245,16 +244,9 @@ export default class Cursor {
    * @returns {Cursor}
    * @example
    * cursor.foreground('black');
-   * cursor.foreground('#AABBCC');
-   * cursor.foreground('rgb(0, 200, 255)');
-   * cursor.foreground(false); // disables foreground filling
    */
   foreground(color) {
-    var newColor = color ? Color.create(color).toRgb() : {r: -1, g: -1, b: -1};
-
-    this._foreground.r = newColor.r;
-    this._foreground.g = newColor.g;
-    this._foreground.b = newColor.b;
+    this._foreground = color ? color : 'none';
 
     return this;
   }
@@ -267,16 +259,9 @@ export default class Cursor {
    * @returns {Cursor}
    * @example
    * cursor.background('black');
-   * cursor.background('#AABBCC');
-   * cursor.background('rgb(0, 200, 255)');
-   * cursor.background(false); // disables background filling
    */
   background(color) {
-    var newColor = color ? Color.create(color).toRgb() : {r: -1, g: -1, b: -1};
-
-    this._background.r = newColor.r;
-    this._background.g = newColor.g;
-    this._background.b = newColor.b;
+    this._background = color ? color : 'none';
 
     return this;
   }

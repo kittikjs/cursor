@@ -1,3 +1,4 @@
+import {COLORS} from './util/colors';
 import {DISPLAY_MODES} from './util/displayModes';
 import {encodeToVT100} from './util/encodeToVT100';
 
@@ -15,14 +16,8 @@ export default class Cell {
    * @param {Object} [options] Options object where you can set additional style to char
    * @param {Number} [options.x] X coordinate
    * @param {Number} [options.y] Y coordinate
-   * @param {Object} [options.background] Background color, fill with -1 if you don't want to use background
-   * @param {Number} [options.background.r] Red channel
-   * @param {Number} [options.background.g] Green channel
-   * @param {Number} [options.background.b] Blue channel
-   * @param {Object} [options.foreground] Foreground color, fill with -1 if you don't want to use foreground
-   * @param {Number} [options.foreground.r] Red channel
-   * @param {Number} [options.foreground.g] Green channel
-   * @param {Number} [options.foreground.b] Blue channel
+   * @param {String} [options.background] Background color name, `none` to disable color
+   * @param {String} [options.foreground] Foreground color name, `none` to disable color
    * @param {Object} [options.display] Object with display modes
    * @param {Boolean} [options.display.bold] Bold style
    * @param {Boolean} [options.display.dim] Dim style
@@ -32,21 +27,21 @@ export default class Cell {
    * @param {Boolean} [options.display.hidden] Hidden style
    */
   constructor(char, options = {}) {
-    var {x, y, background = {}, foreground = {}, display = {}} = options;
+    var {x, y, background, foreground, display = {}} = options;
 
     this._char = ' ';
     this._x = 0;
     this._y = 0;
-    this._background = {r: -1, g: -1, b: -1};
-    this._foreground = {r: -1, g: -1, b: -1};
+    this._background = 'none';
+    this._foreground = 'none';
     this._display = {bold: false, dim: false, underlined: false, blink: false, reverse: false, hidden: false};
     this._modified = false;
 
     this.setChar(char);
     this.setX(x);
     this.setY(y);
-    this.setBackground(background.r, background.g, background.b);
-    this.setForeground(foreground.r, foreground.g, foreground.b);
+    this.setBackground(background);
+    this.setForeground(foreground);
     this.setDisplay(display.bold, display.dim, display.underlined, display.blink, display.reverse, display.hidden);
     this.setModified(false);
   }
@@ -124,15 +119,11 @@ export default class Cell {
   /**
    * Set new background color.
    *
-   * @param {Number} [r=-1] Red channel
-   * @param {Number} [g=-1] Green channel
-   * @param {Number} [b=-1] Blue channel
+   * @param {String} [colorName=none]
    * @returns {Cell}
    */
-  setBackground(r = -1, g = -1, b = -1) {
-    this._background.r = r;
-    this._background.g = g;
-    this._background.b = b;
+  setBackground(colorName = 'none') {
+    this._background = colorName;
 
     return this;
   }
@@ -149,15 +140,11 @@ export default class Cell {
   /**
    * Set new foreground color.
    *
-   * @param {Number} [r=-1] Red channel
-   * @param {Number} [g=-1] Green channel
-   * @param {Number} [b=-1] Blue channel
+   * @param {String} [colorName=none]
    * @returns {Cell}
    */
-  setForeground(r = -1, g = -1, b = -1) {
-    this._foreground.r = r;
-    this._foreground.g = g;
-    this._foreground.b = b;
+  setForeground(colorName = 'none') {
+    this._foreground = colorName;
 
     return this;
   }
@@ -220,7 +207,7 @@ export default class Cell {
    * @returns {Cell}
    */
   reset() {
-    return this.setChar(' ').setBackground(-1, -1, -1).setForeground(-1, -1, -1).setDisplay(false, false, false, false, false, false).setModified(true);
+    return this.setChar(' ').setBackground('none').setForeground('none').setDisplay(false, false, false, false, false, false).setModified(true);
   }
 
   /**
@@ -233,8 +220,8 @@ export default class Cell {
 
     return (
       encodeToVT100(`[${y + 1};${x + 1}f`) +
-      (background.r > -1 ? encodeToVT100(`[48;2;${background.r};${background.g};${background.b}m`) : '') +
-      (foreground.r > -1 ? encodeToVT100(`[38;2;${foreground.r};${foreground.g};${foreground.b}m`) : '') +
+      (background !== 'none' ? encodeToVT100(`[48;5;${COLORS[background]}m`) : '') +
+      (foreground !== 'none' ? encodeToVT100(`[38;5;${COLORS[foreground]}m`) : '') +
       (display.bold ? encodeToVT100(DISPLAY_MODES.BOLD) : '') +
       (display.dim ? encodeToVT100(DISPLAY_MODES.DIM) : '') +
       (display.underlined ? encodeToVT100(DISPLAY_MODES.UNDERLINED) : '') +
