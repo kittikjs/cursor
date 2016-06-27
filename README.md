@@ -35,6 +35,9 @@ Include in your project:
 
 ```javascript
 import Cursor from 'kittik-cursor';
+
+const cursor = Cursor.create().reset();
+cursor.moveTo(10, 10).write('Hello, World').flush();
 ```
 
 ## API
