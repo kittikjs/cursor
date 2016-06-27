@@ -13,6 +13,10 @@
 ![dependencies](https://img.shields.io/david/kittikjs/cursor.svg)
 ![dev dependencies](https://img.shields.io/david/dev/kittikjs/cursor.svg)
 
+## Demo
+
+![kittik-cursor demo](https://cloud.githubusercontent.com/assets/3625244/16379908/89dddd38-3c7c-11e6-883a-c8ad2097be11.gif)
+
 ## Getting Started
 
 Install it via npm:
@@ -26,6 +30,14 @@ Include in your project:
 ```javascript
 import Cursor from 'kittik-cursor';
 ```
+
+## API
+
+API declaration you can find [here](./API.md).
+
+## Examples
+
+Examples you can find [here](./examples).
 
 ## License
 
