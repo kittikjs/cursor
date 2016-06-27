@@ -15,7 +15,13 @@
 
 ## Demo
 
-![kittik-cursor demo](https://cloud.githubusercontent.com/assets/3625244/16379908/89dddd38-3c7c-11e6-883a-c8ad2097be11.gif)
+| Examples |
+| -------- |
+| ![kittik-cursor demo](https://cloud.githubusercontent.com/assets/3625244/16379908/89dddd38-3c7c-11e6-883a-c8ad2097be11.gif) |
+
+| Touhou - Bad Apple  | Rick Astley - Never Gonna Give You Up | Casa Linda Apartments Interview "Not Today" |
+| ------------------- | ------------------------------------- | ------------------------------------------- |
+| [![Touhou - Bad Apple](https://img.youtube.com/vi/_KpDKTihgxY/0.jpg)](https://www.youtube.com/watch?v=_KpDKTihgxY) | [![ Rick Astley - Never Gonna Give You Up ](https://img.youtube.com/vi/JffWhWba2M4/0.jpg)](https://www.youtube.com/watch?v=JffWhWba2M4) | [![Casa Linda Apartments Interview "Not Today"](https://img.youtube.com/vi/ZhN-9Wz97bs/0.jpg)](https://www.youtube.com/watch?v=ZhN-9Wz97bs) |
 
 ## Getting Started
 
